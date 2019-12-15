@@ -4,7 +4,7 @@ namespace BoardGames.Controllers
 {
     public class Categories : Controller
     {
-        // GET
+        [Route("categories")]
         public IActionResult Index()
         {
             return View();

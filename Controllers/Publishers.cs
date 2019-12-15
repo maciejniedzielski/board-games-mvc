@@ -4,7 +4,7 @@ namespace BoardGames.Controllers
 {
     public class Publishers : Controller
     {
-        // GET
+        [Route("publishers")]
         public IActionResult Index()
         {
             return View();
