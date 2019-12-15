@@ -1,3 +1,4 @@
+@model List<Publisher>
 @{
   ViewData["Title"] = "Publishers";
 }
@@ -10,48 +11,27 @@
       <caption>List of publishers</caption>
       <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
+        <th scope="col">No.</th>
         <th scope="col">Name</th>
         <th scope="col">Action</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <th scope="row" class="align-middle">1</th>
-        <td class="align-middle">Rebel</td>
-        <td class="align-middle">
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-edit"></span>
-          </a>
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-trash"></span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row" class="align-middle">2</th>
-        <td class="align-middle">Lacerta</td>
-        <td class="align-middle">
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-edit"></span>
-          </a>
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-trash"></span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row" class="align-middle">3</th>
-        <td class="align-middle">Galakta</td>
-        <td class="align-middle">
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-edit"></span>
-          </a>
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-trash"></span>
-          </a>
-        </td>
-      </tr>
+      @foreach (var (publisher, index) in Model.Select((v, i) => (v, i += 1)))
+      {
+        <tr>
+          <th scope="row" class="align-middle">@index</th>
+          <td class="align-middle">@publisher.Name</td>
+          <td class="align-middle">
+            <a href="#" class="btn btn-default">
+              <span class="fas fa-edit"></span>
+            </a>
+            <a href="#" class="btn btn-default">
+              <span class="fas fa-trash"></span>
+            </a>
+          </td>
+        </tr>
+      }
       </tbody>
     </table>
   </section>
