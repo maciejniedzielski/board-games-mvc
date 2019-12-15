@@ -1,3 +1,5 @@
+@model List<Game>;
+
 @{
   ViewData["Title"] = "Games";
 }
@@ -13,57 +15,32 @@
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Category</th>
+        <th scope="col">Publisher</th>
         <th scope="col">No. of players</th>
         <th scope="col">Age</th>
         <th scope="col">Action</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <th scope="row" class="align-middle">1</th>
-        <td class="align-middle">Monopoly</td>
-        <td class="align-middle">Family</td>
-        <td class="align-middle">2-5</td>
-        <td class="align-middle">6+</td>
-        <td class="align-middle">
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-edit"></span>
-          </a>
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-trash"></span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row" class="align-middle">2</th>
-        <td class="align-middle">Game of Thrones</td>
-        <td class="align-middle">Strategy</td>
-        <td class="align-middle">2-5</td>
-        <td class="align-middle">18+</td>
-        <td class="align-middle">
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-edit"></span>
-          </a>
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-trash"></span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row" class="align-middle">3</th>
-        <td class="align-middle">Pandemic</td>
-        <td class="align-middle">Family</td>
-        <td class="align-middle">2-4</td>
-        <td class="align-middle">8+</td>
-        <td class="align-middle">
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-edit"></span>
-          </a>
-          <a href="#" class="btn btn-default">
-            <span class="fas fa-trash"></span>
-          </a>
-        </td>
-      </tr>
+        @foreach (var game in Model)
+        {
+          <tr>
+            <th scope="row" class="align-middle">@game.Id</th>
+            <td class="align-middle">@game.Name</td>
+            <td class="align-middle">@game.Category.Name</td>
+            <td class="align-middle">@game.Publisher.Name</td>
+            <td class="align-middle">@game.NoOfPlayers</td>
+            <td class="align-middle">@game.Age</td>
+            <td class="align-middle">
+              <a href="#" class="btn btn-default">
+                <span class="fas fa-edit"></span>
+              </a>
+              <a href="#" class="btn btn-default">
+                <span class="fas fa-trash"></span>
+              </a>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
 
