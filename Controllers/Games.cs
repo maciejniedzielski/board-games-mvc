@@ -16,8 +16,6 @@ namespace BoardGames.Controllers
             _dbContext = dbContext;
         }
 
-        
-        // GET
         [Route("games")]
         public IActionResult Index()
         {
