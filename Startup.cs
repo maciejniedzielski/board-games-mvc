@@ -38,9 +38,9 @@ namespace BoardGames
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -52,6 +52,15 @@ namespace BoardGames
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "games",
+                    pattern: "{controller=Games}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "publishers",
+                    pattern: "{controller=Publishers}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "publishers",
+                    pattern: "{controller=Categories}/{action=Index}/{id?}");
             });
         }
     }
