@@ -26,7 +26,9 @@
         {
           <tr>
             <th scope="row" class="align-middle">@index</th>
-            <td class="align-middle">@game.Name</td>
+            <td class="align-middle">
+              <a asp-area="" asp-controller="Games" asp-action="Detail" asp-route-id="@game.Id">@game.Name</a>
+            </td>
             <td class="align-middle">@game.Category.Name</td>
             <td class="align-middle">@game.Publisher.Name</td>
             <td class="align-middle">@game.NoOfPlayers</td>

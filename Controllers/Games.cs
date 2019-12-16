@@ -28,5 +28,15 @@ namespace BoardGames.Controllers
             
             return View(games);
         }
+        
+        [Route("boardgame/{id}")]
+        public IActionResult Detail(int id)
+        {
+            var game = _dbContext.Game.First(g => g.Id == id);
+            game.Category = _dbContext.Category.First(category => category.Id == game.CategoryId);
+            game.Publisher = _dbContext.Publisher.First(publisher => publisher.Id == game.PublisherId);
+            
+            return View(game);
+        }
     }
 }
