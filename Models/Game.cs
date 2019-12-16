@@ -7,6 +7,7 @@ namespace BoardGames.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public string NoOfPlayers { get; set; }
         public string Age { get; set; }
         public string AverageGameTime { get; set; }

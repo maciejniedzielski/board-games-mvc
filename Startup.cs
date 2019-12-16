@@ -59,13 +59,19 @@ namespace BoardGames
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}");
                 endpoints.MapControllerRoute(
                     name: "games",
                     pattern: "{controller=Games}/{action=Index}");
                 endpoints.MapControllerRoute(
+                    name: "games/add",
+                    pattern: "{controller=Games}/{action=Create}");
+                endpoints.MapControllerRoute(
                     name: "boardgame",
-                    pattern: "{controller=Games}/{action=Detail}/{slug}");
+                    pattern: "{controller=Games}/{action=Detail}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "boardgame/edit",
+                    pattern: "{controller=Games}/{action=Edit}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "publishers",
                     pattern: "{controller=Publishers}/{action=Index}/{id?}");

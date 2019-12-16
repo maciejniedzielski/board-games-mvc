@@ -79,6 +79,10 @@ namespace BoardGames.Models
                 entity.Property(e => e.Complexity)
                     .HasColumnName("complexity")
                     .HasColumnType("int(11)");
+                
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasColumnType("text");
 
                 entity.Property(e => e.Edited)
                     .HasColumnName("edited")
