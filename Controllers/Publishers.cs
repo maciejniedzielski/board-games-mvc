@@ -24,8 +24,13 @@ namespace BoardGames.Controllers
         }
         
         [Route("publisher/{id}")]
-        public IActionResult Detail(int id)
+        public IActionResult Detail(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var publisher = _dbContext.Publisher.First(p => p.Id == id);
 
             return View(publisher);

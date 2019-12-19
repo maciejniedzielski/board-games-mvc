@@ -1,3 +1,4 @@
+@using BoardGames.ViewModels
 @model List<Game>;
 
 @{
@@ -11,43 +12,7 @@
   </header>
 
   <section class="text-center">
-    <table class="table">
-      <caption>List of games</caption>
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">No.</th>
-        <th scope="col">Name</th>
-        <th scope="col">Category</th>
-        <th scope="col">Publisher</th>
-        <th scope="col">No. of players</th>
-        <th scope="col">Age</th>
-        <th scope="col">Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      @foreach (var (game, index) in Model.Select((v, i) => (v, i += 1)))
-      {
-        <tr>
-          <th scope="row" class="align-middle">@index</th>
-          <td class="align-middle">
-            <a asp-area="" asp-controller="Games" asp-action="Detail" asp-route-id="@game.Id">@game.Name</a>
-          </td>
-          <td class="align-middle">@game.Category.Name</td>
-          <td class="align-middle">@game.Publisher.Name</td>
-          <td class="align-middle">@game.NoOfPlayers</td>
-          <td class="align-middle">@game.Age</td>
-          <td class="align-middle">
-            <a asp-area="" asp-controller="Games" asp-action="Edit" asp-route-id="@game.Id" class="btn btn-primary">
-              <span class="fas fa-edit"></span>
-            </a>
-            <a asp-area="" asp-controller="Games" asp-action="Delete" asp-route-id="@game.Id" class="btn btn-danger">
-              <span class="fas fa-trash"></span>
-            </a>
-          </td>
-        </tr>
-      }
-      </tbody>
-    </table>
+    @await Html.PartialAsync("~/Views/Shared/_GamesTable.cshtml", new GamesTableViewModel(Model, "List of games", true))
 
     <ul class="pagination pagination-dark justify-content-end">
       <li class="page-item disabled">

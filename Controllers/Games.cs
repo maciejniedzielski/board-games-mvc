@@ -33,8 +33,13 @@ namespace BoardGames.Controllers
         }
 
         [Route("boardgame/{id}")]
-        public IActionResult Detail(int id)
+        public IActionResult Detail(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
             var game = _dbContext.Game.First(g => g.Id == id);
             game.Category = _dbContext.Category.First(category => category.Id == game.CategoryId);
             game.Publisher = _dbContext.Publisher.First(publisher => publisher.Id == game.PublisherId);

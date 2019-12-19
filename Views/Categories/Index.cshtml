@@ -25,7 +25,9 @@
       {
         <tr>
           <th scope="row" class="align-middle">@index</th>
-          <td class="align-middle">@category.Name</td>
+          <td class="align-middle">
+            <a asp-area="" asp-controller="Categories" asp-action="Detail" asp-route-id="@category.Id">@category.Name</a>
+          </td>
           <td class="align-middle">
             <a asp-area="" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary">
               <span class="fas fa-edit"></span>

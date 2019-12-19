@@ -1,0 +1,59 @@
+@model BoardGames.ViewModels.GamesTableViewModel;
+
+<table class="table">
+  <caption>@Model.Caption</caption>
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">No.</th>
+    <th scope="col">Name</th>
+    <th scope="col">Category</th>
+    <th scope="col">Publisher</th>
+    <th scope="col">No. of players</th>
+    <th scope="col">Age</th>
+    @if (@Model.Editable)
+    {
+      <th scope="col">Action</th>
+    }
+  </tr>
+  </thead>
+  <tbody>
+  @if (Model.Games.Count != 0)
+  {
+    @foreach (var (game, index) in Model.Games.Select((v, i) => (v, i += 1)))
+    {
+      <tr>
+        <th scope="row" class="align-middle">@index</th>
+        <td class="align-middle">
+          <a asp-area="" asp-controller="Games" asp-action="Detail" asp-route-id="@game.Id">@game.Name</a>
+        </td>
+        <td class="align-middle">
+          <a asp-area="" asp-controller="Categories" asp-action="Detail" asp-route-id="@game.Category.Id">@game.Category.Name</a>
+        </td>
+        <td class="align-middle">
+          <a asp-area="" asp-controller="Publishers" asp-action="Detail" asp-route-id="@game.Publisher.Id">@game.Publisher.Name</a>
+        </td>
+        <td class="align-middle">@game.NoOfPlayers</td>
+        <td class="align-middle">@game.Age</td>
+        @if (@Model.Editable)
+        {
+          <td class="align-middle">
+            <a asp-area="" asp-controller="Games" asp-action="Edit" asp-route-id="@game.Id" class="btn btn-primary">
+              <span class="fas fa-edit"></span>
+            </a>
+            <a asp-area="" asp-controller="Games" asp-action="Delete" asp-route-id="@game.Id" class="btn btn-danger">
+              <span class="fas fa-trash"></span>
+            </a>
+          </td>
+        }
+      </tr>
+    }
+  }
+  else
+  {
+    <tr>
+      <td class="text-center" colspan="@(@Model.Editable ? "7" : "6")">List is empty</td>
+    </tr>
+  }
+
+  </tbody>
+</table>

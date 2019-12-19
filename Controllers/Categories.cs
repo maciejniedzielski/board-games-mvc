@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BoardGames.Models;
+using BoardGames.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,11 +25,26 @@ namespace BoardGames.Controllers
         }
         
         [Route("category/{id}")]
-        public IActionResult Detail(int id)
+        public IActionResult Detail(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
             var category = _dbContext.Category.First(c => c.Id == id);
-
-            return View(category);
+            var categoryGames = _dbContext.Game.Where(g => g.CategoryId == id).ToList();
+            
+            foreach (var game in categoryGames)
+            {
+                game.Category = _dbContext.Category.First(c => c.Id == game.CategoryId);
+                game.Publisher = _dbContext.Publisher.First(p => p.Id == game.PublisherId);
+            }
+            
+            CategoryDetailViewModel categoryViewModel = new CategoryDetailViewModel(category);
+            categoryViewModel.GamesTableViewModel = new GamesTableViewModel(categoryGames, "List of games for selected category", false);
+            
+            return View(categoryViewModel);
         }
 
         [Route("category/add")]
