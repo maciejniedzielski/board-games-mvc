@@ -14,7 +14,12 @@
   <small class="text-muted">game</small>
 </h1>
 
-<p class="text-danger">@ViewData["ErrorMessage"]</p>
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="alert alert-danger" role="alert">
+    @ViewData["ErrorMessage"]
+  </div>
+}
 
 <div class="jumbotron">
   <form asp-controller="Games" asp-action="Edit" method="post">

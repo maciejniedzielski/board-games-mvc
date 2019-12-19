@@ -1,12 +1,12 @@
-@model Game
+@model Category
 
 @{
-  ViewData["Title"] = "Delete game";
+  ViewData["Title"] = "Delete category";
 }
 
 <h1 class="mt-4 mb-4">
   Delete
-  <small class="text-muted">game</small>
+  <small class="text-muted">category</small>
 </h1>
 
 @if (!ViewData.ModelState.IsValid)
@@ -18,6 +18,6 @@
 
 <h3>Are you sure you want to delete this?</h3>
 
-<form asp-controller="Games" asp-action="Delete" method="post">
+<form asp-controller="Categories" asp-action="Delete" method="post">
   <button type="submit" class="btn btn-danger mt-4">Delete</button>
 </form>
