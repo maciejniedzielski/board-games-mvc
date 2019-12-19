@@ -1,0 +1,23 @@
+@model Publisher
+
+@{
+  ViewData["Title"] = "Delete publisher";
+}
+
+<h1 class="mt-4 mb-4">
+  Delete
+  <small class="text-muted">publisher</small>
+</h1>
+
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="alert alert-danger" role="alert">
+    @ViewData["ErrorMessage"]
+  </div>
+}
+
+<h3>Are you sure you want to delete this?</h3>
+
+<form asp-controller="Publishers" asp-action="Delete" method="post">
+  <button type="submit" class="btn btn-danger mt-4">Delete</button>
+</form>

@@ -1,0 +1,29 @@
+@model Publisher
+
+@{
+  ViewData["Title"] = "Add publisher";
+}
+
+<h1 class="mt-4 mb-4">
+  Add
+  <small class="text-muted">new publisher</small>
+</h1>
+
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="alert alert-danger" role="alert">
+    @ViewData["ErrorMessage"]
+  </div>
+}
+
+<div class="jumbotron">
+  <form asp-controller="Publishers" asp-action="Create" method="post">
+    <div class="form-group">
+      <label for="Name">Name:</label>
+      <input type="text" asp-for="@Model.Name" id="Name" class="form-control" placeholder="Enter publisher name">
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+      <button class="btn btn-primary" type="submit">Add new</button>
+    </div>
+  </form>
+</div>
