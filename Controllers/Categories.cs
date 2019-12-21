@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BoardGames.Models;
@@ -18,10 +19,17 @@ namespace BoardGames.Controllers
         }
             
         [Route("categories")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string name)
         {
-            var categories = _dbContext.Category.ToList();
-            return View(categories);
+            var categories = _dbContext.Category.AsQueryable();
+            
+            if (!String.IsNullOrEmpty(name))
+            {
+                categories = categories.Where(c => c.Name.ToLower().Contains(name.ToLower()));
+            }
+
+            TempData["SearchString"] = name ?? "";
+            return View(await categories.ToListAsync());
         }
         
         [Route("category/{id}")]
