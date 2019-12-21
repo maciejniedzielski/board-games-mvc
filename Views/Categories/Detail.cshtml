@@ -5,15 +5,12 @@
   ViewData["Title"] = "Category \"" + @Model.Category.Name + "\"";
 }
 
-<h1 class="mt-4 mb-4">
-  Category
-  <small class="text-muted">details</small>
+<h1 class="mt-5 mb-5">
+  @Model.Category.Name
+  <small class="text-muted"> - category</small>
 </h1>
 
 <div class="jumbotron">
-  <h1>@Model.Category.Name</h1>
-  
-  <div class="mt-5 mb-2">
-    @Html.Partial("~/Views/Shared/_GamesTable.cshtml", @Model.GamesTableViewModel)
-  </div>
+  <h3 class="mb-4 text-secondary">Related games:</h3>
+  @Html.Partial("~/Views/Shared/_GamesTable.cshtml", @Model.GamesTableViewModel)
 </div>
