@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BoardGames.Models;
@@ -18,10 +19,17 @@ namespace BoardGames.Controllers
         }
 
         [Route("publishers")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string name)
         {
-            var publishers = _dbContext.Publisher.ToList();
-            return View(publishers);
+            var publishers = _dbContext.Publisher.AsQueryable();
+            
+            if (!String.IsNullOrEmpty(name))
+            {
+                publishers = publishers.Where(p => p.Name.ToLower().Contains(name.ToLower()));
+            }
+
+            TempData["SearchString"] = name ?? "";
+            return View(await publishers.ToListAsync());
         }
         
         [Route("publisher/{id}")]
