@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using BoardGames.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,16 +22,33 @@ namespace BoardGames.Controllers
         }
 
         [Route("games")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string name)
         {
-            var games = _dbContext.Game.ToList();
-            foreach (var game in games)
+            var games = (from g in _dbContext.Game
+                         join category in _dbContext.Category on g.CategoryId equals category.Id
+                         join publisher in _dbContext.Publisher on g.PublisherId equals publisher.Id
+                         select new Game
+                         {
+                             Id = g.Id,
+                             Name = g.Name,
+                             Description = g.Description,
+                             NoOfPlayers = g.NoOfPlayers,
+                             Age = g.Age,
+                             AverageGameTime = g.AverageGameTime,
+                             Randomness = g.Randomness,
+                             Interaction = g.Interaction,
+                             Complexity = g.Complexity,
+                             Category = category,
+                             Publisher = publisher
+                         });
+
+            if (!String.IsNullOrEmpty(name))
             {
-                game.Category = _dbContext.Category.First(category => category.Id == game.CategoryId);
-                game.Publisher = _dbContext.Publisher.First(publisher => publisher.Id == game.PublisherId);
+                games = games.Where(g => g.Name.ToLower().Contains(name.ToLower()));
             }
 
-            return View(games);
+            TempData["SearchString"] = name ?? "";
+            return View(await games.ToListAsync());
         }
 
         [Route("boardgame/{id}")]
