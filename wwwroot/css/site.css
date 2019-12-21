@@ -76,3 +76,7 @@ body {
 .ql-container {
   height: 200px !important;
 }
+
+ul, ol {
+  margin-bottom: 0;
+}

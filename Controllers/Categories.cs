@@ -91,8 +91,7 @@ namespace BoardGames.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             var categoryToUpdate = await _dbContext.Category.FirstOrDefaultAsync(c => c.Id == id);
-
-
+            
             return View(categoryToUpdate);
         }
         
@@ -113,7 +112,6 @@ namespace BoardGames.Controllers
                 c => c.Name
                 )
             )
-                
             {
                 try
                 {
@@ -122,12 +120,7 @@ namespace BoardGames.Controllers
                 }
                 catch (DbUpdateException)
                 {
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                                                 "Try again, and if the problem persists, " +
-                                                 "see your system administrator.");
-                    
-                    ViewData["ErrorMessage"] =
-                        "Edit failed. Try again.";
+                    ModelState.AddModelError("", "Edit failed. Try again.");
                 }
             }
 

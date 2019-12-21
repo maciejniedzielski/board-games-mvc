@@ -81,6 +81,7 @@ namespace BoardGames.Models
                     .HasColumnType("int(11)");
                 
                 entity.Property(e => e.Description)
+                    .IsRequired()
                     .HasColumnName("description")
                     .HasColumnType("text");
 

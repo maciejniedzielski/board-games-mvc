@@ -17,7 +17,7 @@
 @if (!ViewData.ModelState.IsValid)
 {
   <div class="alert alert-danger" role="alert">
-    @ViewData["ErrorMessage"]
+    @Html.ValidationSummary(false, "Form is invalid. Please fix following errors and try again.")
   </div>
 }
 
@@ -26,35 +26,42 @@
     <div class="form-group">
       <label for="Name">Name:</label>
       <input type="text" asp-for="@Model.Name" id="Name" class="form-control" placeholder="Enter game name">
+      <span asp-validation-for="Name" class="text-danger ml-3"></span>
     </div>
     <div class="form-group">
       <label for="NoOfPlayers">No. of players:</label>
       <input type="text" asp-for="@Model.NoOfPlayers" id="NoOfPlayers" class="form-control" placeholder='Enter players number (ex. "1-5")'>
+      <span asp-validation-for="NoOfPlayers" class="text-danger ml-3"></span>
     </div>
     <div class="form-group">
       <label for="Age">Age:</label>
       <input type="text" asp-for="@Model.Age" id="Age" class="form-control" placeholder='Enter age (ex. "6+")'>
+      <span asp-validation-for="Age" class="text-danger ml-3"></span>
     </div>
     <div class="form-group">
       <label for="AverageGameTime">Average game time:</label>
       <input type="text" asp-for="@Model.AverageGameTime" id="AverageGameTime" class="form-control" placeholder='Enter average game time (ex. "90-120")'>
+      <span asp-validation-for="AverageGameTime" class="text-danger ml-3"></span>
     </div>
     <div class="form-row">
       <div class="col">
         <label for="Randomness">Randomness:</label>
         <input type="number" min="1" max="6" asp-for="@Model.Randomness" id="Randomness" class="form-control" placeholder="Randomness range 1-6">
+        <span asp-validation-for="Randomness" class="text-danger ml-3"></span>
       </div>
       <div class="col">
         <label for="Interaction">Interaction:</label>
         <input type="number" min="1" max="6" asp-for="@Model.Interaction" id="Interaction" class="form-control" placeholder="Interaction range 1-6">
+        <span asp-validation-for="Interaction" class="text-danger ml-3"></span>
       </div>
       <div class="col">
         <label for="Complexity">Complexity:</label>
         <input type="number" min="1" max="6" asp-for="@Model.Complexity" id="Complexity" class="form-control" placeholder="Complexity range 1-6">
+        <span asp-validation-for="Complexity" class="text-danger ml-3"></span>
       </div>
     </div>
     
-<div class="row mt-3">
+    <div class="row mt-3">
       <div class="form-group col-6">
         <label for="Category">Category:</label>
         <select asp-for="@Model.CategoryId" id="Category" class="form-control">
@@ -85,6 +92,7 @@
       <div class="form-group bg-white">
         <div id="editor"></div>
       </div>
+      <span asp-validation-for="Description" class="text-danger ml-3"></span>
     </div>
 
     <div class="d-flex justify-content-center mt-4">

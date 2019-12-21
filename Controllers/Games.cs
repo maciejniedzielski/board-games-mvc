@@ -128,7 +128,7 @@ namespace BoardGames.Controllers
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         [Route("boardgame/edit/{id}")]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> EditGame(int? id)
         {
             if (id == null)
             {
@@ -150,21 +150,16 @@ namespace BoardGames.Controllers
                 g => g.CategoryId,
                 g => g.PublisherId)
             )
-                
             {
                 try
                 {
                     await _dbContext.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException)
+                catch (DbUpdateException ex)
                 {
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                                                 "Try again, and if the problem persists, " +
-                                                 "see your system administrator.");
-                    
-                    ViewData["ErrorMessage"] =
-                        "Edit failed. Try again.";
+                    Console.WriteLine(ex.ToString());
+                    @ViewData["ErrorMessage"] = "Edit failed. Try again.";
                 }
             }
             
