@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BoardGames.Models;
+using BoardGames.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,10 +31,20 @@ namespace BoardGames.Controllers
             {
                 return NotFound();
             }
-
+            
             var publisher = _dbContext.Publisher.First(p => p.Id == id);
-
-            return View(publisher);
+            var publisherGames = _dbContext.Game.Where(g => g.PublisherId == id).ToList();
+            
+            foreach (var game in publisherGames)
+            {
+                game.Category = _dbContext.Category.First(c => c.Id == game.CategoryId);
+                game.Publisher = _dbContext.Publisher.First(p => p.Id == game.PublisherId);
+            }
+            
+            PublisherDetailViewModel categoryViewModel = new PublisherDetailViewModel(publisher);
+            categoryViewModel.GamesTableViewModel = new GamesTableViewModel(publisherGames, "List of games for selected publisher", false);
+            
+            return View(categoryViewModel);
         }
 
         [Route("publisher/add")]

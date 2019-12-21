@@ -1,5 +1,19 @@
-@model Publisher
+@using BoardGames.ViewModels
+@model BoardGames.ViewModels.PublisherDetailViewModel
 
 @{
-  ViewData["Title"] = @Model.Name;
+  ViewData["Title"] = "Publisher \"" + @Model.Publisher.Name + "\"";
 }
+
+<h1 class="mt-4 mb-4">
+  Publisher
+  <small class="text-muted">details</small>
+</h1>
+
+<div class="jumbotron">
+  <h1>@Model.Publisher.Name</h1>
+  
+  <div class="mt-5 mb-2">
+    @Html.Partial("~/Views/Shared/_GamesTable.cshtml", @Model.GamesTableViewModel)
+  </div>
+</div>
