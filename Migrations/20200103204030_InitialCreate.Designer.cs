@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGames.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200103190522_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20200103204030_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,10 +27,7 @@ namespace BoardGames.Migrations
                         .HasColumnType("int(11)");
 
                     b.Property<DateTime?>("Added")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("added")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -52,10 +49,7 @@ namespace BoardGames.Migrations
                         .HasColumnType("int(11)");
 
                     b.Property<DateTime?>("Added")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("added")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Age")
                         .IsRequired()
@@ -133,10 +127,7 @@ namespace BoardGames.Migrations
                         .HasColumnType("int(11)");
 
                     b.Property<DateTime?>("Added")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("added")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()

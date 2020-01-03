@@ -32,11 +32,6 @@ namespace BoardGames.Models
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Added)
-                    .HasColumnName("added")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
@@ -56,11 +51,6 @@ namespace BoardGames.Models
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
-
-                entity.Property(e => e.Added)
-                    .HasColumnName("added")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
 
                 entity.Property(e => e.Age)
                     .IsRequired()
@@ -137,11 +127,6 @@ namespace BoardGames.Models
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Added)
-                    .HasColumnName("added")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
@@ -149,8 +134,6 @@ namespace BoardGames.Models
                     .HasCharSet("latin1")
                     .HasCollation("latin1_swedish_ci");
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

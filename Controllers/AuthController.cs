@@ -10,10 +10,12 @@ namespace BoardGames.Controllers
     {
 
         private readonly UserManager<IdentityUser> _userManager;
-        
-        public AuthController(UserManager<IdentityUser> userManager)
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         
         [Route("auth/register")]
@@ -49,6 +51,39 @@ namespace BoardGames.Controllers
             }
 
             return View(model);
+        }
+        
+        [Route("auth/login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("auth/login")]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "Home");
+                }
+                
+                ModelState.AddModelError(string.Empty, "Invalid email or password");
+            }
+
+            return View(model);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("index", "Home");
         }
     }
 }

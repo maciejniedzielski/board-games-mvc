@@ -25,10 +25,7 @@ namespace BoardGames.Migrations
                         .HasColumnType("int(11)");
 
                     b.Property<DateTime?>("Added")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("added")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -50,10 +47,7 @@ namespace BoardGames.Migrations
                         .HasColumnType("int(11)");
 
                     b.Property<DateTime?>("Added")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("added")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Age")
                         .IsRequired()
@@ -131,10 +125,7 @@ namespace BoardGames.Migrations
                         .HasColumnType("int(11)");
 
                     b.Property<DateTime?>("Added")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("added")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()

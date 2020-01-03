@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BoardGames.Migrations
 {
-    public partial class AddIdentity : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,7 @@ namespace BoardGames.Migrations
                     id = table.Column<int>(type: "int(11)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     name = table.Column<string>(type: "varchar(50)", nullable: false),
-                    added = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "'CURRENT_TIMESTAMP'")
+                    Added = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@ namespace BoardGames.Migrations
                     id = table.Column<int>(type: "int(11)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     name = table.Column<string>(type: "varchar(100)", nullable: false),
-                    added = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "'CURRENT_TIMESTAMP'")
+                    Added = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -197,7 +197,7 @@ namespace BoardGames.Migrations
                     complexity = table.Column<int>(type: "int(11)", nullable: true),
                     category_id = table.Column<int>(type: "int(11)", nullable: true),
                     publisher_id = table.Column<int>(type: "int(11)", nullable: true),
-                    added = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "'CURRENT_TIMESTAMP'"),
+                    Added = table.Column<DateTime>(nullable: true),
                     edited = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
