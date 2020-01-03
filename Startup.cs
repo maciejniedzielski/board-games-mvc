@@ -7,6 +7,7 @@ using BoardGames.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,8 @@ namespace BoardGames
             services.AddDbContextPool<AppDbContext>(options => options
                 .UseMySql(Configuration.GetConnectionString("DatabaseConnection"))
             );
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +56,7 @@ namespace BoardGames
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -60,6 +64,9 @@ namespace BoardGames
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}");
+                endpoints.MapControllerRoute(
+                    name: "auth/register",
+                    pattern: "{controller=Auth}/{action=Register}");
                 endpoints.MapControllerRoute(
                     name: "games",
                     pattern: "{controller=Games}/{action=Index}");

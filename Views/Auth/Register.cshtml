@@ -1,0 +1,40 @@
+@model BoardGames.ViewModels.RegisterViewModel
+
+@{
+  ViewData["Title"] = "Register";
+}
+
+<h1 class="mt-5 mb-5">
+  Register
+  <small class="text-muted">new user</small>
+</h1>
+
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="alert alert-danger" role="alert">
+    @Html.ValidationSummary(false, "Form is invalid. Please fix following errors and try again.")
+  </div>
+}
+
+<div class="jumbotron">
+  <form asp-controller="Auth" asp-action="Register" method="post">
+    <div class="form-group">
+      <label for="Name">Email:</label>
+      <input type="text" asp-for="@Model.Email" id="Email" class="form-control" placeholder="Enter email">
+      <span asp-validation-for="Email" class="text-danger ml-3"></span>
+    </div>
+    <div class="form-group">
+      <label for="Name">Password:</label>
+      <input type="password" asp-for="@Model.Password" id="Password" class="form-control" placeholder="Enter password">
+      <span asp-validation-for="Password" class="text-danger ml-3"></span>
+    </div>
+    <div class="form-group">
+      <label for="Name">Repeat password:</label>
+      <input type="password" asp-for="@Model.ConfirmPassword" id="ConfirmPassword" class="form-control" placeholder="Repeat password">
+      <span asp-validation-for="ConfirmPassword" class="text-danger ml-3"></span>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+      <button class="btn btn-primary" type="submit">Register</button>
+    </div>
+  </form>
+</div>
