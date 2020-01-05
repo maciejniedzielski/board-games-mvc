@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using BoardGames.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,16 @@ namespace BoardGames
             );
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+            
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "BoardGameCookie";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = false;
+                options.LoginPath = "/auth/login";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BoardGames.Models;
 using BoardGames.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -56,6 +57,7 @@ namespace BoardGames.Controllers
         }
 
         [Route("publisher/add")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -64,6 +66,7 @@ namespace BoardGames.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("publisher/add")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Publisher publisher)
         {
             try
@@ -88,6 +91,7 @@ namespace BoardGames.Controllers
         }
         
         [Route("publisher/edit/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             var publisherToUpdate = await _dbContext.Publisher.FirstOrDefaultAsync(c => c.Id == id);
@@ -99,6 +103,7 @@ namespace BoardGames.Controllers
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         [Route("publisher/edit/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditPublisher(int? id)
         {
             if (id == null)
@@ -135,6 +140,7 @@ namespace BoardGames.Controllers
         }
 
         [Route("publisher/delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -163,6 +169,7 @@ namespace BoardGames.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("publisher/delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var publisher = await _dbContext.Publisher.FindAsync(id);

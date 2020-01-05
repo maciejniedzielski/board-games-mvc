@@ -1,11 +1,13 @@
 using System.Threading.Tasks;
 using BoardGames.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardGames.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AuthController : Controller
     {
 

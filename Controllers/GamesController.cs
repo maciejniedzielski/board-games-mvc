@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using BoardGames.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -67,6 +68,7 @@ namespace BoardGames.Controllers
         }
 
         [Route("games/add")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             
@@ -82,6 +84,7 @@ namespace BoardGames.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("games/add")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Game game)
         {
             try
@@ -112,6 +115,7 @@ namespace BoardGames.Controllers
         }
         
         [Route("boardgame/edit/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             var gameToUpdate = await _dbContext.Game.FirstOrDefaultAsync(s => s.Id == id);
@@ -128,6 +132,7 @@ namespace BoardGames.Controllers
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         [Route("boardgame/edit/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditGame(int? id)
         {
             if (id == null)
@@ -173,6 +178,7 @@ namespace BoardGames.Controllers
         }
 
         [Route("boardgame/delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -201,6 +207,7 @@ namespace BoardGames.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("boardgame/delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var game = await _dbContext.Game.FindAsync(id);
