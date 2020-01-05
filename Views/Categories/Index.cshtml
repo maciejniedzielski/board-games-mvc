@@ -26,7 +26,11 @@
       <tr>
         <th scope="col">No.</th>
         <th scope="col">Type</th>
-        <th scope="col">Action</th>
+        @if (User.IsInRole("Admin"))
+        {
+          <th scope="col">Action</th>
+
+        }
       </tr>
       </thead>
       <tbody>
@@ -39,14 +43,17 @@
             <td class="align-middle">
               <a asp-area="" asp-controller="Categories" asp-action="Detail" asp-route-id="@category.Id">@category.Name</a>
             </td>
-            <td class="align-middle">
-              <a asp-area="" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary">
-                <span class="fas fa-edit"></span>
-              </a>
-              <a asp-area="" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger">
-                <span class="fas fa-trash"></span>
-              </a>
-            </td>
+            @if (User.IsInRole("Admin"))
+            {
+              <td class="align-middle">
+                <a asp-area="" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary">
+                  <span class="fas fa-edit"></span>
+                </a>
+                <a asp-area="" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger">
+                  <span class="fas fa-trash"></span>
+                </a>
+              </td>
+            }
           </tr>
         }
       }

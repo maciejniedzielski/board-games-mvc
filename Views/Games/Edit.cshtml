@@ -22,7 +22,7 @@
 }
 
 <div class="jumbotron">
-  <form asp-controller="Games" asp-action="Edit" method="post">
+  <form asp-controller="Games" asp-action="Edit" method="post" id="form">
     <div class="form-group">
       <label for="Name">Name:</label>
       <input type="text" asp-for="@Model.Name" id="Name" class="form-control" placeholder="Enter game name">
@@ -100,17 +100,8 @@
     </div>
   </form>
 </div>
-<script>
-  const options = {
-    theme: 'snow',
-  };
-  const editor = new Quill('#editor', options);
-  const description = document.querySelector('input[name=Description]');
-  const form = document.querySelector('form');
-  
-  editor.setContents(JSON.parse(description.value ? description.value : "{}"));
-  
-  form.onsubmit = function () {
-    description.value = JSON.stringify(editor.getContents());
-  };
-</script>
+
+@section Scripts
+{
+  <script defer src="@Url.Content("~/js/quillEditor.js")"></script>
+}

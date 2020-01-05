@@ -10,7 +10,7 @@
     <th scope="col">Publisher</th>
     <th scope="col">No. of players</th>
     <th scope="col">Age</th>
-    @if (@Model.Editable)
+    @if (@Model.Editable && User.IsInRole("Admin"))
     {
       <th scope="col">Action</th>
     }
@@ -34,7 +34,7 @@
         </td>
         <td class="align-middle">@game.NoOfPlayers</td>
         <td class="align-middle">@game.Age</td>
-        @if (@Model.Editable)
+        @if (@Model.Editable && User.IsInRole("Admin"))
         {
           <td class="align-middle">
             <a asp-area="" asp-controller="Games" asp-action="Edit" asp-route-id="@game.Id" class="btn btn-primary">
