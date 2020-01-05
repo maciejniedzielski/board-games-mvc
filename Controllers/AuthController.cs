@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BoardGames.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AuthController : Controller
     {
 
@@ -92,12 +91,14 @@ namespace BoardGames.Controllers
         
         
         [Route("auth/add-role")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddRole()
         {
             return View();
         }
         
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRoleAction()
         {
             IdentityResult roleResult;
@@ -117,6 +118,7 @@ namespace BoardGames.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddUserToRoleAction()
         {
 
