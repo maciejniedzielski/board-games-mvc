@@ -11,11 +11,13 @@ namespace BoardGames.Controllers
 
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
         
         [Route("auth/register")]
@@ -83,6 +85,42 @@ namespace BoardGames.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            return RedirectToAction("index", "Home");
+        }
+        
+        
+        [Route("auth/add-role")]
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> AddRoleAction()
+        {
+            IdentityResult roleResult;
+            
+            var roleCheck = await _roleManager.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "Admin"
+                };
+                
+                roleResult = await _roleManager.CreateAsync(role);
+            }
+            
+            return RedirectToAction("index", "Home");
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> AddUserToRoleAction()
+        {
+
+            var user = await _userManager.FindByIdAsync("df2bbc3f-5e63-49cb-94b4-32e39305d549");
+            var result = await _userManager.AddToRoleAsync(user, "Admin");
+            
             return RedirectToAction("index", "Home");
         }
     }
