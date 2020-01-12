@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BoardGames.Models
@@ -15,8 +14,7 @@ namespace BoardGames.Models
         
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
-        public DateTime? Added { get; set; }
-
+        
         public virtual ICollection<Game> Game { get; set; }
     }
 }
