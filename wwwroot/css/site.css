@@ -84,3 +84,13 @@ ul, ol {
 .jumbotron {
   padding: 2rem
 }
+
+.auth-bg {
+  background-image: url("https://images.unsplash.com/photo-1549056630-ee2626bb5ad5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80");
+  background-size: cover;
+  background-position: center center;
+}
+
+.jumbotron--dark {
+  background: #2c3135;
+}

@@ -8,14 +8,23 @@
   <link rel="stylesheet" href="~/css/site.css"/>
   <script src="https://kit.fontawesome.com/1c64bcf471.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-dark">
-
-<div class="mt-2 ml-2">
-  <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><span class="fas fa-arrow-left mr-2"></span>Back to website</a>
-</div>
-
-<div class="container w-50">
-  @RenderBody()
+<body class="bg-dark m-0 vh-100">
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="auth-bg col-6">
+    </div>
+    <div class="col-6 pl-5 pr-5 text-white d-flex flex-column justify-content-center">
+      <header class="mt-5 mb-5">
+        <h1>
+          @ViewData["Title"]
+          <small class="text-muted">or</small>
+        </h1>
+        <a asp-area="" asp-controller="Home" asp-action="Index"><span class="fas fa-arrow-left mr-2"></span>Back to website</a>
+      </header>
+      
+      @RenderBody()
+    </div>
+  </div>
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

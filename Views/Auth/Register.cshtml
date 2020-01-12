@@ -2,12 +2,8 @@
 
 @{
   ViewData["Title"] = "Register";
+  Layout = "_AuthLayout";
 }
-
-<h1 class="mt-5 mb-5 text-white">
-  Register
-  <small class="text-muted">new user</small>
-</h1>
 
 @if (!ViewData.ModelState.IsValid)
 {
@@ -16,25 +12,27 @@
   </div>
 }
 
-<div class="jumbotron">
+<div class="jumbotron jumbotron--dark">
   <form asp-controller="Auth" asp-action="Register" method="post">
     <div class="form-group">
-      <label for="Name">Email:</label>
+      <label for="Name">@Html.DisplayNameFor(model => model.Email):</label>
       <input type="text" asp-for="@Model.Email" id="Email" class="form-control" placeholder="Enter email">
-      <span asp-validation-for="Email" class="text-danger ml-3"></span>
+      <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-      <label for="Name">Password:</label>
+      <label for="Name">@Html.DisplayNameFor(model => model.Password):</label>
       <input type="password" asp-for="@Model.Password" id="Password" class="form-control" placeholder="Enter password">
-      <span asp-validation-for="Password" class="text-danger ml-3"></span>
+      <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-group">
-      <label for="Name">Repeat password:</label>
+      <label for="Name">@Html.DisplayNameFor(model => model.ConfirmPassword):</label>
       <input type="password" asp-for="@Model.ConfirmPassword" id="ConfirmPassword" class="form-control" placeholder="Repeat password">
-      <span asp-validation-for="ConfirmPassword" class="text-danger ml-3"></span>
+      <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
     <div class="d-flex justify-content-center mt-4">
-      <button class="btn btn-lg btn-primary" type="submit">Register</button>
+      <button class="btn btn-lg btn-primary w-50" type="submit">Register</button>
     </div>
   </form>
+  
+  <p class="mb-0 mt-4">Already registered? <a asp-area="" asp-controller="Auth" asp-action="Login">Login</a></p>
 </div>
