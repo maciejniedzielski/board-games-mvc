@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Web;
 using BoardGames.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -57,8 +58,9 @@ namespace BoardGames.Controllers
         }
         
         [Route("auth/login")]
-        public IActionResult Login()
+        public IActionResult Login([FromQuery(Name = "ReturnUrl")] string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
         
@@ -73,7 +75,14 @@ namespace BoardGames.Controllers
             
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "Home");
+                    if (Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "Home");
+                    }
                 }
                 
                 ModelState.AddModelError(string.Empty, "Invalid email or password");
