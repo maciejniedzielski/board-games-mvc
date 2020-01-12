@@ -2,10 +2,8 @@
 @model BoardGames.ViewModels.CategoryDetailViewModel
 
 @{
-  ViewData["Title"] = "Category \"" + @Model.Category.Name + "\"";
+  ViewData["Title"] = @Model.Category.Name;
 }
-
-
 
 <header class="mt-5 mb-5 d-flex align-items-center justify-content-between">
   <h1>

@@ -2,7 +2,7 @@
 @model BoardGames.ViewModels.PublisherDetailViewModel
 
 @{
-  ViewData["Title"] = "Publisher \"" + @Model.Publisher.Name + "\"";
+  ViewData["Title"] = @Model.Publisher.Name;
 }
 
 <header class="d-flex align-items-center justify-content-between">
