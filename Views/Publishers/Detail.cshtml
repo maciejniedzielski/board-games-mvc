@@ -5,10 +5,20 @@
   ViewData["Title"] = "Publisher \"" + @Model.Publisher.Name + "\"";
 }
 
-<h1 class="mt-5 mb-5">
-  @Model.Publisher.Name
-  <small class="text-muted"> - publisher</small>
-</h1>
+<header class="d-flex align-items-center justify-content-between">
+  <h1 class="mt-5 mb-5">
+    @Model.Publisher.Name
+    <small class="text-muted"> - publisher</small>
+  </h1>
+
+  <div>
+  @if (User.IsInRole("Admin"))
+    {
+      <a asp-area="" asp-controller="Publishers" asp-action="Edit" asp-route-id="@Model.Publisher.Id" class="btn btn-primary">Edit</a>
+      <a asp-area="" asp-controller="Publishers" asp-action="Delete" asp-route-id="@Model.Publisher.Id" class="btn btn-danger">Delete</a>
+    }  
+  </div>
+</header>
 
 <div class="jumbotron">
   <h3 class="mb-4 text-secondary">Related games:</h3>

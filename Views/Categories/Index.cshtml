@@ -1,23 +1,12 @@
+@using BoardGames.ViewModels
 @model List<Category>;
 @{
   ViewData["Title"] = "Categories";
 }
 
 <div>
-  <header class="d-flex align-items-center justify-content-between">
-    <h1 class="mt-5 mb-5">Categories</h1>
-    
-    <form asp-controller="Categories" asp-action="Index" method="get">
-      <div class="input-group">
-        <input type="search" name="name" class="form-control" placeholder="Search by name" value="@TempData["SearchString"]">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit" value="Filter">Search</button>
-        </div>
-      </div>
-    </form>
-    
-    <a asp-area="" asp-controller="Categories" asp-action="Create" class="btn btn-primary">Add new</a>    
-  </header>
+  @await Html.PartialAsync("~/Views/Shared/_IndexHeader.cshtml", new IndexHeaderViewModel("Categories"))
+
 
   <section class="text-center">
     <table class="table">
@@ -29,7 +18,6 @@
         @if (User.IsInRole("Admin"))
         {
           <th scope="col">Action</th>
-
         }
       </tr>
       </thead>

@@ -5,10 +5,22 @@
   ViewData["Title"] = "Category \"" + @Model.Category.Name + "\"";
 }
 
-<h1 class="mt-5 mb-5">
-  @Model.Category.Name
-  <small class="text-muted"> - category</small>
-</h1>
+
+
+<header class="mt-5 mb-5 d-flex align-items-center justify-content-between">
+  <h1>
+    @Model.Category.Name
+    <small class="text-muted"> - category</small>
+  </h1>
+
+  <div>
+  @if (User.IsInRole("Admin"))
+    {
+      <a asp-area="" asp-controller="Categories" asp-action="Edit" asp-route-id="@Model.Category.Id" class="btn btn-primary">Edit</a>
+      <a asp-area="" asp-controller="Categories" asp-action="Delete" asp-route-id="@Model.Category.Id" class="btn btn-danger">Delete</a>
+    }  
+  </div>
+</header>
 
 <div class="jumbotron">
   <h3 class="mb-4 text-secondary">Related games:</h3>

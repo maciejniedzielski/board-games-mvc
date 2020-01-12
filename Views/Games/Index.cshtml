@@ -6,40 +6,9 @@
 }
 
 <div>
-  <header class="d-flex align-items-center justify-content-between">
-    <h1 class="mt-5 mb-5">Games</h1>
-    
-    <form asp-controller="Games" asp-action="Index" method="get">
-      <div class="input-group">
-        <input type="search" name="name" class="form-control" placeholder="Search by name" value="@TempData["SearchString"]">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit" value="Filter">Search</button>
-        </div>
-      </div>
-    </form>
-
-    <a asp-area="" asp-controller="Games" asp-action="Create" class="btn btn-primary">Add new</a>    
-  </header>
+  @await Html.PartialAsync("~/Views/Shared/_IndexHeader.cshtml", new IndexHeaderViewModel("Games"))
 
   <section class="text-center">
     @await Html.PartialAsync("~/Views/Shared/_GamesTable.cshtml", new GamesTableViewModel(Model, "List of games", true))
-
-    <ul class="pagination pagination-dark justify-content-end">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">1</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
   </section>
 </div>
