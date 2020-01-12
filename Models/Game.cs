@@ -26,12 +26,15 @@ namespace BoardGames.Models
         public string AverageGameTime { get; set; }
         
         [Range(1, 6, ErrorMessage = "Randomness must be number between 1-6")]
+        [Display(Name = "Randomness")]
         public int? Randomness { get; set; }
         
         [Range(1, 6, ErrorMessage = "Interaction must be number between 1-6")]
+        [Display(Name = "Interaction")]
         public int? Interaction { get; set; }
         
         [Range(1, 6, ErrorMessage = "Complexity must be number between 1-6")]
+        [Display(Name = "Complexity")]
         public int? Complexity { get; set; }
         
         public int? CategoryId { get; set; }

@@ -94,3 +94,20 @@ ul, ol {
 .jumbotron--dark {
   background: #2c3135;
 }
+
+.dice-icon {
+  font-size: 28px;
+  margin-right: 1rem;
+}
+
+.dice-icon--active {
+  color: #1b6ec2;
+}
+
+.dice-icon--inactive {
+  color: #b9b9b9;
+}
+
+.rating-name {
+  width: 120px;
+}
