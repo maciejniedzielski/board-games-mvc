@@ -97,44 +97,5 @@ namespace BoardGames.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("index", "Home");
         }
-        
-        
-        [Route("auth/add-role")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult AddRole()
-        {
-            return View();
-        }
-        
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddRoleAction()
-        {
-            IdentityResult roleResult;
-            
-            var roleCheck = await _roleManager.RoleExistsAsync("Admin");
-            if (!roleCheck)
-            {
-                IdentityRole role = new IdentityRole
-                {
-                    Name = "Admin"
-                };
-                
-                roleResult = await _roleManager.CreateAsync(role);
-            }
-            
-            return RedirectToAction("index", "Home");
-        }
-        
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddUserToRoleAction()
-        {
-
-            var user = await _userManager.FindByIdAsync("df2bbc3f-5e63-49cb-94b4-32e39305d549");
-            var result = await _userManager.AddToRoleAsync(user, "Admin");
-            
-            return RedirectToAction("index", "Home");
-        }
     }
 }

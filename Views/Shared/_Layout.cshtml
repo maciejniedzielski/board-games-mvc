@@ -31,6 +31,19 @@
           <li class="nav-item">
             <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
           </li>
+          
+          @if (User.IsInRole("Admin"))
+          {
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin tools
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+              </div>
+            </li>
+          }
         </ul>
         
         @if (signInManager.IsSignedIn(User))

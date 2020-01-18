@@ -111,3 +111,28 @@ ul, ol {
 .rating-name {
   width: 120px;
 }
+
+.navbar-nav .dropdown-menu {
+  background: #343a40;
+}
+
+.navbar-dark .navbar-nav .show>.nav-link {
+  color: rgba(255,255,255,.5);
+}
+
+.navbar-dark .navbar-nav .show>.nav-link:hover {
+  color: rgba(255,255,255,.75);
+}
+
+.disabled, .disabled:focus, .disabled.active, .disabled:hover {
+  cursor: auto;
+  outline: none;
+  box-shadow: none;
+}
+
+.custom-alert {
+  position: absolute;
+  top: 100px;
+  left: 30%;
+  z-index: 1;
+}

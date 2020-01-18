@@ -1,0 +1,30 @@
+@model BoardGames.ViewModels.RoleCreateViewModel
+
+@{
+  ViewData["Title"] = "Create role";
+}
+
+<h1 class="mt-5 mb-5">
+  Create
+  <small class="text-muted">new role</small>
+</h1>
+
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="alert alert-danger" role="alert">
+    @Html.ValidationSummary(false, "Form is invalid. Please fix following errors and try again.")
+  </div>
+}
+
+<div class="jumbotron">
+  <form method="POST" asp-controller="Roles" asp-action="Create">
+    <div class="form-group">
+      <label for="Name">Name:</label>
+      <input type="text" asp-for="@Model.Name" id="Name" class="form-control" placeholder="Enter role name">
+      <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary">
+      Create role
+    </button>
+  </form>
+</div>

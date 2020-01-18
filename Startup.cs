@@ -82,6 +82,9 @@ namespace BoardGames
                     name: "auth/login",
                     pattern: "{controller=Auth}/{action=Login}");
                 endpoints.MapControllerRoute(
+                    name: "auth/add-role",
+                    pattern: "{controller=Auth}/{action=Login}");
+                endpoints.MapControllerRoute(
                     name: "games",
                     pattern: "{controller=Games}/{action=Index}");
                 endpoints.MapControllerRoute(

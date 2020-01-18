@@ -1,0 +1,144 @@
+@model BoardGames.ViewModels.UsersIndexViewModel
+
+@{
+  ViewData["Title"] = "Users";
+}
+
+<header class="row mt-5 mb-5">
+  <div class="col-6 d-flex align-items-center">
+    <h1>Users</h1>
+  </div>
+</header>
+
+<div id="successAlert" class="alert alert-success alert-dismissible fade custom-alert" role="alert">
+  <strong>Success!</strong> You have successufully adder user to role.
+  <p>User: <span id="UserEmail"></span>, Role: <span id="RoleName"></span></p>
+
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<table class="table">
+  <caption>List of identity roles</caption>
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col" class="w-75">Name</th>
+    <th scope="col" class="text-center">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  @foreach (var user in @Model.Users)
+  {
+    <tr>
+      <td class="align-middle w-75">
+        @user.Email
+      </td>
+      <td class="align-middle text-center">
+        @if(User.Identity.Name == @user.Email)
+        {
+          <button type="button" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="left" title="You can't change the role to yourself">
+            Assign Role
+          </button>
+        }
+        else
+        {
+          <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-userid="@user.Id" data-useremail="@user.Email" data-target="#modal">
+            Assign Role
+          </button>
+        }
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Change user role</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form">
+          <input type="text" hidden id="UserEmailInput">
+          <input type="text" hidden id="UserIdInput">
+          <div class="form-group">
+            <label for="roleSelect">Select role:</label>
+            <select class="form-control" id="roleSelect">
+              @foreach (var role in @Model.Roles)
+              {
+                <option value="@role.Name">@role.Name</option>
+              }
+            </select>
+          </div>
+        </form>
+        
+        <div id="error" class="alert alert-danger d-none" role="alert">
+          Sorry, an error has occured. Try again later.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="SubmitButton" class="btn btn-primary">Change role</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+  
+  const modalButtons = document.querySelectorAll('.modal-button');
+  const userIdInput = document.querySelector('#UserIdInput');
+  const userEmailInput = document.querySelector('#UserEmailInput');
+  const submitButton = document.querySelector('#SubmitButton');
+  const roleSelect = document.querySelector('#roleSelect');
+  const error = document.querySelector('#error');
+
+  modalButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+       const userId = button.dataset.userid;
+       const userEmail = button.dataset.useremail;
+
+       userIdInput.value = userId;
+       userEmailInput.value = userEmail;
+    });
+  });
+  
+    async function submitForm() {
+     const rawResponse = await fetch("/admin/add-user-to-role", {
+       method: 'POST',
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({UserId: userIdInput.value, RoleName: roleSelect.value})
+     });
+     
+     const response = await rawResponse.json();
+     
+     if (response.status) {
+       console.log(roleSelect.value, userEmailInput.value);
+       $('#RoleName').html(roleSelect.value);
+       $('#UserEmail').html(userEmailInput.value);
+
+       $('#modal').modal('hide');
+       $('#successAlert').addClass("show");
+
+       setTimeout(function() {
+          $('#successAlert').removeClass("show").addClass("hide");
+       }, 2000)
+     } else {
+       error.removeClass("d-none");
+     }
+  }
+  submitButton.addEventListener('click', () => submitForm(), false);
+    
+ })
+</script>

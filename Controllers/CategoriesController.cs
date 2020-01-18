@@ -80,9 +80,6 @@ namespace BoardGames.Controllers
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("", "Unable to save changes. " +
-                                             "Try again, and if the problem persists " +
-                                             "see your system administrator.");
                 ViewData["ErrorMessage"] =
                     "Create failed. Try again.";
             }
