@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
 using BoardGames.Validators;
 
 namespace BoardGames.Models
 {
-    public partial class Game
+    public partial class GameCreateViewModel
     {
         public int Id { get; set; }
         
         [Required(ErrorMessage = "Name is required")]
+        [UniqueGameName]
         public string Name { get; set; }
         
         [Required(ErrorMessage = "Description is required")]

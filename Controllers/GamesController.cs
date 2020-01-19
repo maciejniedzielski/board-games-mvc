@@ -1,15 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using BoardGames.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace BoardGames.Controllers
 {
@@ -85,7 +80,7 @@ namespace BoardGames.Controllers
         [ValidateAntiForgeryToken]
         [Route("games/add")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(Game game)
+        public async Task<IActionResult> Create(GameCreateViewModel game)
         {
             try
             {
@@ -122,7 +117,7 @@ namespace BoardGames.Controllers
                     
             var publishers = _dbContext.Publisher.ToList();
             ViewData["Publishers"] = publishers;
-
+            
             return View(gameToUpdate);
         }
         
